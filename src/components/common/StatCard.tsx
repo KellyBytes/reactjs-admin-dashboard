@@ -4,7 +4,7 @@ import type { LucideIcon } from 'lucide-react';
 type Props = {
   name: string;
   icon: LucideIcon;
-  value: string;
+  value: string | number;
   color: string;
 };
 
