@@ -21,8 +21,11 @@ const SIDEBAR_ITEMS = [
   { name: 'Analytics', icon: TrendingUp, color: '#3B82F6', href: '/analytics' },
   { name: 'Settings', icon: Settings, color: '#6EE7B7', href: '/settings' },
 ];
+
 const Sidebar = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(
+    () => window.innerWidth >= 640,
+  );
 
   return (
     <motion.div
@@ -41,7 +44,15 @@ const Sidebar = () => {
 
         <nav className="mt-8 flex-grow">
           {SIDEBAR_ITEMS.map(item => (
-            <Link key={item.href} to={item.href}>
+            <Link
+              key={item.href}
+              to={item.href}
+              onClick={() => {
+                if (window.innerWidth < 640) {
+                  setIsSidebarOpen(false);
+                }
+              }}
+            >
               <motion.div className="flex items-center p-4 text-sm font-medium rounded-lg hover:bg-gray-700 transition-colors mb-2">
                 <item.icon
                   size={20}
